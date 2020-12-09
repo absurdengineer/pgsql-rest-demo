@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const fs = require('fs')
 const student = require('./routes/apis/student.api')
+const { json } = require('express')
 
 //* Application
 const app = express()
@@ -13,6 +14,7 @@ app.use(morgan('combined', {
 
 //* Settings
 const PORT = (process.env.PORT || 3000)
+app.use(json())
 
 //* Routers
 app.use("/api/students/",student)
