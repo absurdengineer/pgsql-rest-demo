@@ -1,13 +1,15 @@
 const express = require('express')
 const morgan = require('morgan')
-const pool = require('./databases/db')
+const fs = require('fs')
 const student = require('./routes/apis/student.api')
 
 //* Application
 const app = express()
 
 //* Middlewares
-app.use(morgan('dev'))
+app.use(morgan('combined', {
+    stream: fs.createWriteStream('./access.log', {flags: 'a'})
+}));
 
 //* Settings
 const PORT = (process.env.PORT || 3000)
